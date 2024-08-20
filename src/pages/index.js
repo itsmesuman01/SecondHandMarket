@@ -1,7 +1,14 @@
 import React from "react";
+import Topbar from "../components/Topbar";
+import Carasoul from "@/components/Carasoul";
 
-const index = () => {
-  return <div>This is index page</div>;
+const Index = () => {
+  return (
+    <div>
+      <Topbar />
+      <Carasoul />
+    </div>
+  );
 };
 
-export default index;
+export default Index;
