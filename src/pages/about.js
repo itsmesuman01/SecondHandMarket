@@ -2,7 +2,9 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div>This is about us page</div>
+    <>
+      <h1 className="h-14 bg-gradient-to-r from-cyan-500 to-blue-500">Test tailwind</h1>
+    </>
   )
 }
 
