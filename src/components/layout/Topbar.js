@@ -13,10 +13,10 @@ const TopBar = () => {
               <Link href="/" className="text-lg hover:text-yellow-400 transition-colors">Home</Link>
             </li>
             <li>
-              <Link href="/sell" className="text-lg hover:text-yellow-400 transition-colors">Sell</Link>
+              <Link href="/buy" className="text-lg hover:text-yellow-400 transition-colors">Buy</Link>
             </li>
             <li>
-              <Link href="/buy" className="text-lg hover:text-yellow-400 transition-colors">Buy</Link>
+              <Link href="/sell" className="text-lg hover:text-yellow-400 transition-colors">Sell</Link>
             </li>
             <li>
               <Link href="/contact" className="text-lg hover:text-yellow-400 transition-colors">Contact</Link>
