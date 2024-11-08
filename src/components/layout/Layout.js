@@ -1,16 +1,11 @@
-import React from 'react';
 import Topbar from './Topbar';
 import Footer from './Footer';
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Topbar />
-      <div style={{ display: 'flex' }}>
-        <main style={{ flex: 1, padding: '20px' }}>
-          {children}
-        </main>
-      </div>
+      <main className="flex-1 p-6 bg-gray-50">{children}</main>
       <Footer />
     </div>
   );

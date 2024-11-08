@@ -15,6 +15,7 @@
     "postcss": "^8.4.47",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^5.3.0",
     "tailwindcss": "^3.4.14",
     "webpack": "^5.93.0"
   },

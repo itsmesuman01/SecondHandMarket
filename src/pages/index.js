@@ -1,10 +1,12 @@
 import React from "react";
-import About from "./about";
+import Home from "./home.js";
+// import About from "./about";
 
 const Index = () => {
   return (
     <div>
-      <About />
+      {/* <About /> */}
+      <Home />
     </div>
   );
 };
