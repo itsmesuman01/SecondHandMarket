@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const ViewDetails = () => {
   const [item, setItem] = useState(null);
@@ -28,9 +29,11 @@ const ViewDetails = () => {
 
       <div className="mb-6">
         {item.images.length > 0 ? (
-          <img
+          <Image
             src={item.images[0]}
             alt={item.itemName}
+            width={800}
+            height={320}
             className="w-full h-80 object-cover rounded-md"
           />
         ) : (
@@ -52,11 +55,13 @@ const ViewDetails = () => {
           <h3 className="text-xl font-semibold text-gray-800">Additional Images</h3>
           <div className="flex space-x-4 mt-4">
             {item.images.slice(1).map((image, index) => (
-              <img
+              <Image
                 key={index}
                 src={image}
                 alt={`Item Preview ${index + 1}`}
-                className="w-32 h-32 object-cover rounded-md"
+                width={128}
+                height={128}
+                className="object-cover rounded-md"
               />
             ))}
           </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const Buy = () => {
   const [items, setItems] = useState([]);
@@ -28,10 +29,12 @@ const Buy = () => {
             >
               <div className="mb-4">
                 {item.images.length > 0 ? (
-                  <img
+                  <Image
                     src={item.images[0]}
                     alt={`Item Preview ${index + 1}`}
                     className="w-full h-48 object-cover rounded-md"
+                    width={500}
+                    height={200}
                   />
                 ) : (
                   <div className="w-full h-48 bg-gray-200 flex items-center justify-center rounded-md">

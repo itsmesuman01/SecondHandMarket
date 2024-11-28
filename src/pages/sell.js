@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const Sell = () => {
   const [itemName, setItemName] = useState('');
@@ -167,11 +168,13 @@ const Sell = () => {
           <h3 className="text-lg font-medium text-gray-700">Uploaded Images</h3>
           <div className="flex space-x-4 mt-2">
             {images.map((image, index) => (
-              <img
+              <Image
                 key={index}
                 src={image}
                 alt={`Uploaded Preview ${index + 1}`}
-                className="w-24 h-24 object-cover rounded-md"
+                width={96}
+                height={96}
+                className="object-cover rounded-md"
               />
             ))}
           </div>

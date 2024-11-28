@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -101,9 +102,9 @@ const Register = () => {
             <div className="text-center">
                 <p className="text-sm text-gray-600">
                     Already have an account?{' '}
-                    <a href="/login" className="text-blue-600 hover:underline">
-                        Login here
-                    </a>
+                    <Link href="/login">
+                        <a className="text-blue-600 hover:underline">Login here</a>
+                    </Link>
                 </p>
             </div>
         </div>
