@@ -1,16 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-const ViewDetails = () => {
-  const [item, setItem] = useState(null);
+interface Item {
+  itemName: string;
+  description: string;
+  price: number;
+  category: string;
+  images: string[];
+}
+
+const ViewDetails: React.FC = () => {
+  const [item, setItem] = useState<Item | null>(null);
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
+    // Check if id is defined before attempting to fetch item
     if (id !== undefined) {
-      const storedItems = JSON.parse(localStorage.getItem('items')) || [];
-      const selectedItem = storedItems[id];
-      setItem(selectedItem);
+      const storedItems: Item[] = JSON.parse(localStorage.getItem('items') || '[]');
+      const selectedItem = storedItems[Number(id)]; // Use Number to convert the id to an index
+      setItem(selectedItem || null);
     }
   }, [id]);
 

@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'; // Import social media icons
+import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-800 text-white py-8">
       <div className="max-w-screen-xl mx-auto px-4">

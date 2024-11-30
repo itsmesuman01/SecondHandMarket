@@ -1,22 +1,39 @@
-import { useState, useEffect } from 'react';
+import { redirect } from 'next/dist/server/api-utils';
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
-const Sell = () => {
-  const [itemName, setItemName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [category, setCategory] = useState('');
-  const [images, setImages] = useState([]);
-  const [error, setError] = useState(null);
+interface Item {
+  itemName: string;
+  description: string;
+  price: string;
+  category: string;
+  images: string[];
+}
+
+const Sell: React.FC = () => {
+  const [itemName, setItemName] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [price, setPrice] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
+  const [images, setImages] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+const router = useRouter();
 
   useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem('items'));
+    const storedItems = localStorage.getItem('items');
     if (storedItems) {
-      setImages(storedItems);
+      const parsedItems: Item[] = JSON.parse(storedItems);
+      
+      // Flatten all images into a single array of image URLs
+      const allImages = parsedItems.flatMap(item => item.images);
+      setImages(allImages);  // Set the flattened image URLs into the state
     }
   }, []);
 
-  const handleImageChange = (e) => {
-    const fileArray = Array.from(e.target.files);
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const fileArray = Array.from(e.target.files || []);
 
     if (images.length + fileArray.length > 5) {
       setError('You can upload a maximum of 5 images.');
@@ -24,9 +41,9 @@ const Sell = () => {
     }
 
     const imagePromises = fileArray.map((file) => {
-      return new Promise((resolve, reject) => {
+      return new Promise<string>((resolve, reject) => {
         const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
+        reader.onloadend = () => resolve(reader.result as string);
         reader.onerror = reject;
         reader.readAsDataURL(file);
       });
@@ -38,12 +55,12 @@ const Sell = () => {
         setImages(updatedImages);
         localStorage.setItem('images', JSON.stringify(updatedImages));
       })
-      .catch((err) => {
+      .catch(() => {
         setError('Error uploading images. Please try again.');
       });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     if (!itemName || !description || !price || !category || images.length === 0) {
@@ -56,7 +73,7 @@ const Sell = () => {
       return;
     }
 
-    const newItem = {
+    const newItem: Item = {
       itemName,
       description,
       price,
@@ -64,18 +81,20 @@ const Sell = () => {
       images,
     };
 
-    const existingItems = JSON.parse(localStorage.getItem('items')) || [];
+    const existingItems: Item[] = JSON.parse(localStorage.getItem('items') || '[]');
 
     existingItems.push(newItem);
 
     localStorage.setItem('items', JSON.stringify(existingItems));
 
-    setItemName('');
-    setDescription('');
-    setPrice('');
-    setCategory('');
-    setImages([]);
-    setError(null);
+    router.push('/buy');
+
+    // setItemName('');
+    // setDescription('');
+    // setPrice('');
+    // setCategory('');
+    // setImages([]);
+    // setError(null);
   };
 
   return (
@@ -108,7 +127,7 @@ const Sell = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="mt-2 p-3 w-full border border-gray-300 rounded-md"
-            rows="4"
+            rows={4}
             required
           />
         </div>
@@ -124,7 +143,7 @@ const Sell = () => {
             onChange={(e) => setPrice(e.target.value)}
             className="mt-2 p-3 w-full border border-gray-300 rounded-md"
             required
-            min="1"
+            min={1}
           />
         </div>
 

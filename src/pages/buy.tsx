@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+interface Item {
+  images: string[];
+  itemName: string;
+  description: string;
+  price: number;
+  category: string;
+}
+
 const Buy = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Item[]>([]);
   const router = useRouter();
 
   useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem('items')) || [];
+    const storedItems = JSON.parse(localStorage.getItem('items') || '[]') as Item[];
     setItems(storedItems);
   }, []);
 
-  const handleViewDetails = (index) => {
+  const handleViewDetails = (index: number) => {
     router.push(`/view/${index}`);
   };
 

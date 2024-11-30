@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const TopBar = () => {
+const TopBar: React.FC = () => {
   return (
     <header className="bg-gray-800 text-white sticky top-0 z-50 shadow-md">
       <div className="max-w-screen-xl mx-auto px-4 py-3 flex justify-between items-center">

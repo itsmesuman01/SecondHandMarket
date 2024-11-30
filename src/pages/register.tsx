@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/router';
 
-const Register = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+const Register: React.FC = () => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [error, setError] = useState<string>('');
+    const [success, setSuccess] = useState<string>('');
     const router = useRouter();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 
         if (!email || !password || !confirmPassword) {
@@ -38,6 +38,10 @@ const Register = () => {
         }, 2000);
     };
 
+    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
+    const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value);
+
     return (
         <div className="max-w-screen-sm mx-auto p-6 bg-white shadow-md rounded-md mt-10">
             <h1 className="text-3xl font-semibold text-center mb-6">Register</h1>
@@ -54,7 +58,7 @@ const Register = () => {
                         type="email"
                         id="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                         className="mt-2 p-3 w-full border border-gray-300 rounded-md"
                         required
                     />
@@ -68,7 +72,7 @@ const Register = () => {
                         type="password"
                         id="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePasswordChange}
                         className="mt-2 p-3 w-full border border-gray-300 rounded-md"
                         required
                     />
@@ -82,7 +86,7 @@ const Register = () => {
                         type="password"
                         id="confirmPassword"
                         value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        onChange={handleConfirmPasswordChange}
                         className="mt-2 p-3 w-full border border-gray-300 rounded-md"
                         required
                     />

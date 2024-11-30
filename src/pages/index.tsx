@@ -1,8 +1,7 @@
 import React from "react";
-import Home from "./home.js";
-// import About from "./about";
+import Home from "./home";
 
-const Index = () => {
+const Index: React.FC = () => {
   return (
     <div>
       {/* <About /> */}
