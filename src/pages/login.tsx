@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>('');
@@ -81,10 +82,10 @@ const Login: React.FC = () => {
 
             <div className="text-center">
                 <p className="text-sm text-gray-600">
-                    Don't have an account?{' '}
-                    <a href="/register" className="text-blue-600 hover:underline">
-                        Register here
-                    </a>
+                    Don&apos;t have an account?{' '}
+                    <Link href="/register">
+                        <a className="text-blue-600 hover:underline">Register here</a>
+                    </Link>
                 </p>
             </div>
         </div>
